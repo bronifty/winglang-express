@@ -3,7 +3,7 @@ bring http;
 bring expect;
 bring fs;
 
-let express = new m.ExpressApp(fs.join(@dirname, "./server/app.ts"));
+let express = new m.ExpressApp(fs.join(@dirname, "./deploy/lambda.cjs"));
 
 test "calling express" {
   log(express.url);
