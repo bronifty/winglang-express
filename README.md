@@ -1,7 +1,10 @@
 ## Setup
 
+> Note: use npm it doesn't work with pnpm
+
 Requirements:
-* Wing CLI
+
+- Wing CLI
 
 ```
 npm install
