@@ -1,6 +1,6 @@
 bring aws;
 bring cloud;
-// bring "@cdktf/provider-aws" as tfaws;
+bring "@cdktf/provider-aws" as tfaws;
 
 pub class ExpressApp {
   extern "./app.js" static handler(appDirectory: str): inflight (Json, aws.ILambdaContext): str?;
@@ -23,6 +23,17 @@ pub class ExpressApp {
           headers: req.headers,
         };
         return unsafeCast(fn.invoke(awsRequest)!);
+    });
+    api.get("/assets/:id", inflight (req) => {
+      let method: str = unsafeCast(req.method);
+      let awsRequest = Json {
+        path: req.path,
+        queryStringParameters: req.query,
+        body: req.body,
+        httpMethod: method,
+        headers: req.headers,
+      };
+      return unsafeCast(fn.invoke(awsRequest)!);
     });
     this.url = api.url;
     new cloud.Endpoint(this.url);
